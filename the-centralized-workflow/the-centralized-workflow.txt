@@ -1,0 +1,7 @@
+os três principais tipos de workflow
+quando o workflow centralizado é o mais viável(poucos desenvolvedores e acesso limitado ao branch principal)
+criar um repositório remoto(no caso, utilizando o servidor do GitHub)
+simulação:
+colaborador cria um branch local, commita e sobe o branch
+durante isso, o gerenciador do repositório commita e sobe o commit no master
+o gerenciador então traz para o local o branch criado, faz o merge e sobe

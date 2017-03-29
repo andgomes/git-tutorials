@@ -28,7 +28,7 @@
 		remoto, é indicado seguir esse workflow para evitar alterações
 		indesejadas neste branch que provavelmente deve permanecer estável.
 		Portanto, nesse workflow, as alterações de código são feitas em branches
-		separadass e posteriormente incluídas no branch principal.
+		separadas e posteriormente incluídas no branch principal.
 		</p>
 
 		<p>
@@ -37,6 +37,72 @@
 		utilizar o serviço do GitHub para criar o nosso repositório. A
 		utilização do GitHub está fora do escopo do post, mas há inúmeros
 		tutorais na internet sobre o assunto.
+		</p>
+
+		<p>
+		Para reproduzir a nossa simulação, caso você não tenha um parceiro com
+		outro computador, basta adicionar o repositório remoto em dois
+		diretórios diferentes. Dentro de cada diretório, que chamaremos de
+		admin-repo e coworker-repo, inicialize-o como repositório git e adicione
+		o endereço do repositório remoto.
+		</p>
+
+		<p>
+		$ git init
+		$ git remote add origin https://github.com/username/repo-name.git
+		</p>
+
+		<p>
+		Onde username é o seu username do GitHub e repo-name é o nome do
+		repositório remoto. Dessa forma, quando simularmos a ação do admin do
+		repositório remoto, executaremos os comandos no diretório admin-repo.
+		Para simular a ação do colaborador, o faremos no diretório
+		coworker-repo. Dito isso, vamos começar a simular a utilização do
+		workflow centralizado.
+		</p>
+
+		<p>
+		Suponha que o admin do repositório remoto criou uma classe chamada
+		ShowMessage, fez commit e, como tem autorização para atualizar
+		diretamente o branch master remoto, fez um push diretamente para esse
+		branch no servidor.
+		</p>
+
+		<p>
+		---ShowMessage.java---
+		</p>
+
+		<p>
+		$ git add ShowMessage.java
+		$ git commit -m "Classe ShowMessage criada"
+		$ git push origin master
+		</p>
+
+		<p>
+		---Imagem do repositório remoto---
+		</p>
+
+		<p>
+		O colaborador então, para trazer a classe incluída pelo admin, faz um
+		fetch e tem a ideia de criar um novo método que retorna a mesma mensagem
+		em italiano. Como não poderá subir a alteração diretamente para o
+		master, o colaborador cria um branch local chamado newLanguage e altera
+		a classe nesse branch.
+		</p>
+
+		<p>
+		$ git fetch origin
+		$ git merge origin/master
+		$ git branch newLanguage
+		$ git checkout newLanguage
+		</p>
+
+		<p>
+		---Imagem do repositório local do colaborador---
+		</p>
+
+		<p>
+		---ShowMessage.java modificado---
 		</p>
 	</body>
 </html>

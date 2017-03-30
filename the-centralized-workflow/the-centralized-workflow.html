@@ -48,7 +48,7 @@
 		</p>
 
 		<p>
-		$ git init
+		$ git init <br />
 		$ git remote add origin https://github.com/username/repo-name.git
 		</p>
 
@@ -73,8 +73,8 @@
 		</p>
 
 		<p>
-		$ git add ShowMessage.java
-		$ git commit -m "Classe ShowMessage criada"
+		$ git add ShowMessage.java <br />
+		$ git commit -m "Classe ShowMessage criada" <br />
 		$ git push origin master
 		</p>
 
@@ -91,10 +91,16 @@
 		</p>
 
 		<p>
-		$ git fetch origin
-		$ git merge origin/master
-		$ git branch newLanguage
-		$ git checkout newLanguage
+		---ShowMessage.java modificado---
+		</p>
+
+		<p>
+		$ git fetch origin <br />
+		$ git merge origin/master <br />
+		$ git branch newLanguage <br />
+		$ git checkout newLanguage <br />
+		$ git add ShowMessage.java <br />
+		$ git commit "Nova linguagem: italiano"
 		</p>
 
 		<p>
@@ -102,7 +108,60 @@
 		</p>
 
 		<p>
+		---Imagem do repositório remoto---
+		</p>
+
+		<p>
+		Nesse meio tempo, antes do colaborador subir o commit, o admin adiciona
+		um método com a mensagem em portugês, faz commit e sobe a alteração
+		diretamente para o master remoto.
+		</p>
+
+		<p>
 		---ShowMessage.java modificado---
+		</p>
+
+		<p>
+		$ git add ShowMessage.java
+		$ git commit -m "Nova linguagem: português"
+		$ git push origin master
+		</p>
+
+		<p>
+		---Imagem do repositório remoto---
+		</p>
+
+		<p>
+		O colaborador, sem conhecimento do novo commit no repositório remoto,
+		sobe o branch newLanguage criando um branch com o mesmo nome no
+		repositório remoto. A opção -u sincroniza o branch newLanguage local
+		com o remoto.
+		</p>
+
+		<p>
+		$ git push -u origin newLanguage
+		</p>
+
+		<p>
+		---Imagem do repositório local---
+		</p>
+
+		<p>
+		---Imagem do repositório remoto---
+		</p>
+
+		<p>
+		O colaborador manda um email para o admin avisando que subiu um commit e
+		o admin então traz os novos commits do repositório remoto para o seu
+		repositório local.
+		</p>
+
+		<p>
+		$ git fetch origin
+		</p>
+
+		<p>
+		---Imagem do repositório local
 		</p>
 	</body>
 </html>

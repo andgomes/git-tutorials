@@ -5,5 +5,3 @@ simulação:
 colaborador cria um branch local, commita e sobe o branch
 durante isso, o gerenciador do repositório commita e sobe o commit no master
 o gerenciador então traz para o local o branch criado, faz o merge e sobe
-outro ciclo, mas dessa vez com merge conflict
-a ideia de utilizar uma simulação(mostra os principais comandos)

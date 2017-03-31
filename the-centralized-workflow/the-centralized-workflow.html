@@ -49,16 +49,15 @@
 
 		<p>
 		$ git init <br />
-		$ git remote add origin https://github.com/username/repo-name.git
+		$ git remote add origin https://github.com/username/my-repo.git
 		</p>
 
 		<p>
-		Onde username é o seu username do GitHub e repo-name é o nome do
-		repositório remoto. Dessa forma, quando simularmos a ação do admin do
-		repositório remoto, executaremos os comandos no diretório admin-repo.
-		Para simular a ação do colaborador, o faremos no diretório
-		coworker-repo. Dito isso, vamos começar a simular a utilização do
-		workflow centralizado.
+		Onde username é o seu username do GitHub. Dessa forma, quando simularmos
+		a ação do admin do repositório remoto, executaremos os comandos no
+		diretório admin-repo. Para simular a ação do colaborador, o faremos no
+		diretório coworker-repo. Dito isso, vamos começar a simular a utilização
+		do workflow centralizado.
 		</p>
 
 		<p>
@@ -91,14 +90,17 @@
 		</p>
 
 		<p>
+		$ git fetch origin <br />
+		$ git merge origin/master <br />
+		$ git branch newLanguage <br />
+		$ git checkout newLanguage
+		</p>
+
+		<p>
 		---ShowMessage.java modificado---
 		</p>
 
 		<p>
-		$ git fetch origin <br />
-		$ git merge origin/master <br />
-		$ git branch newLanguage <br />
-		$ git checkout newLanguage <br />
 		$ git add ShowMessage.java <br />
 		$ git commit "Nova linguagem: italiano"
 		</p>
@@ -122,8 +124,8 @@
 		</p>
 
 		<p>
-		$ git add ShowMessage.java
-		$ git commit -m "Nova linguagem: português"
+		$ git add ShowMessage.java <br />
+		$ git commit -m "Nova linguagem: português" <br />
 		$ git push origin master
 		</p>
 
@@ -162,6 +164,28 @@
 
 		<p>
 		---Imagem do repositório local
+		</p>
+
+		<p>
+		O colaborador faz merge do branch origin/newLanguage(branch que foi
+		trazido do repositório remoto) com o branch master localmente, e então
+		executa um push do branch master, já com o novo commit criado pelo
+		merge, para o repositório remoto.
+		</p>
+
+		<p>
+		$ git merge origin/newLanguage <br />
+		$ git push origin
+		</p>
+
+		<p>
+		E está completo o workflow. As próximas alterações que o colaborador
+		fizer seguirão o mesmo passo-a-passo, que pode se utilizado de forma
+		idêntica com mais dois ou três colaboradores. Com uma equipe com mais
+		que cinco desenvolvedores trabalhando continuamente, o workflow
+		centralizado se torna inadequado, principalmente para o admin, que terá
+		que integrar todos os branches no master. Nos próximos posts veremos os
+		outros dois tipos de workflow, mais adequados à equipes maiores.
 		</p>
 	</body>
 </html>

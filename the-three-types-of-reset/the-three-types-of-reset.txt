@@ -1,0 +1,6 @@
+A função principal do comando reset(reverter alterações) e o receio em utilizá-lo
+A ideia de que só há um tipo de reset
+Os três tipos de reset
+reset --soft
+reset --mixed(default)
+reset --hard

@@ -35,18 +35,53 @@
 		---Imagem da área de stage, de working e o ponteiro HEAD---
 		</p>
 		
+		<h2>
+		reset --soft
+		</h2>
+
 		<p>
-		O primeiro tipo de reset é utilizado com a opção --soft e descarta apenas
-		as alterações no diretório de working. Isso quer dizer que qualquer alteração que ainda
-		não tenha sido adicionada à área de stage será totalmente perdida, mas
-		o ponteiro HEAD e a área de stage não serão modificadas. Por exemplo,
-		imagine que em um repositório aconteceram dois commits e algumas alterações
-		que ainda não foram commitadas mas já adicionadas à área de stage. Além disso,
-		há algumas alterações que não foram adicionadas à área de stage.
+		O primeiro tipo de reset é utilizado com a opção --soft e move apenas o
+		ponteiro HEAD para algum outro commit, sem alterar a área de stage ou o
+		diretório de working. Essa é a opção mais segura entre as três, pois
+		caso seja executada por engano, todo o trabalho atual ainda está
+		acessível. Como exemplo, imagine que em um repositório aconteceram três
+		commits e não houve nenhuma alteração de arquivos depois do último
+		commit, ou seja, as áreas de stage e o diretório de working estão
+		exatamente iguais ao commit mais recente.
 		</p>
-		
+
 		<p>
-		---Imagem da área de stage, de working e o ponteiro HEAD---
+		---Ponteiro HEAD, área de stage e diretório de working---
+		</p>
+
+		<p>
+		Se executarmos o comando
+		</p>
+
+		<p>
+		$ git reset --soft HEAD~
+		</p>
+
+		<p>
+		o ponteiro HEAD será movido para o commit anterior e as áreas de stage e
+		working não serão alteradas. Caso quiséssemos commitar novamente o
+		trabalho atual, bastaria executar outro comando commit, já que as
+		versões mais recentes dos arquivos estão na área de stage prontas para
+		serem submetidas.
+		</p>
+
+		<p>
+		Observe que, ao invés do parent do commit atual(HEAD~), poderíamos
+		especificar qualquer commit alcançável pelo ponteiro HEAD pelo seu
+		código SHA-1. Por exemplo, executar o comando
+		</p>
+
+		<p>
+		$ git reset --soft ab319bc
+		</p>
+
+		<p>
+		teria o mesmo efeito de executar o comando anterior.
 		</p>
 	</body>
 </html>

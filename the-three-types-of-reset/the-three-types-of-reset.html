@@ -83,5 +83,49 @@
 		<p>
 		teria o mesmo efeito de executar o comando anterior.
 		</p>
+
+		<h2>
+		reset --mixed
+		</h2>
+
+		<p>
+		O segundo tipo de reset pode ser utilizado com a opção --mixed ou, por
+		ser o tipo default, somente com o comando reset. Essa opção, além de
+		mover o ponteiro HEAD, faz com que a área de stage contenha o mesmo
+		snapshot do commit para o qual o ponteiro HEAD foi movido, porém não
+		afeta o diretório de working. Por exemplo, imagine que em um repositório
+		foram executados três commits e nenhuma alteração foi feita após o
+		último commit.
+		</p>
+
+		<p>
+		---ponteiro HEAD, área de stage e diretório de working---
+		</p>
+
+		<p>
+		Se executarmos o comando
+		</p>
+
+		<p>
+		$ git reset HEAD~
+		</p>
+
+		<p>
+		o ponteiro HEAD será movido para o commit anterior ao atual, a área de
+		stage terá o mesmo conteúdo do commit apontado pelo HEAD e o diretório
+		de working não será modificado.
+		</p>
+
+		<p>
+		---ponteiro HEAD movido, área de stage alterada e diretório de working
+		intacto---
+		</p>
+
+		<p>
+		Essa opção de reset é mais drástica do que a opção --soft, porém, como o
+		diretório de working não é modificado, as versões mais recentes dos
+		arquivos não são perdidos e podem ser adicionados à área de stage e
+		commitados novamente.
+		</p>
 	</body>
 </html>

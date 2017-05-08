@@ -127,5 +127,56 @@
 		arquivos não são perdidos e podem ser adicionados à área de stage e
 		commitados novamente.
 		</p>
+
+		<h2>
+		reset --hard
+		</h2>
+
+		<p>
+		O terceiro e mais perigoso tipo de reset é utilizado com a opção --hard
+		e não só descarta as alterações na área de stage como também reverte
+		todas as alterações no diretório de working para o estado do commit que
+		foi especificado no comando. Por exemplo, imagine um repositório no
+		mesmo estado do caso anterior.
+		</p>
+
+		<p>
+		---ponteiro HEAD, área de stage e diretório de working---
+		</p>
+
+		<p>
+		Se executarmos o comando
+		</p>
+
+		<p>
+		$ git reset --hard HEAD~
+		</p>
+
+		<p>
+		O ponteiro HEAD será movido para o commit anterior e as áreas de stage e
+		working serão revertidas para o mesmo estado do commit apontado pelo
+		HEAD.
+		</p>
+
+		<p>
+		---ponteiro HEAD movido, área de stage e de working alteradas---
+		</p>
+
+		<p>
+		Como todas as alterações recentes, commitadas ou não, são perdidas, essa
+		opção só deve der executada se houver um bom motivo para tal.
+		</p>
+
+		<p>
+		Essas são as três formas de reset relacionadas ao histórico de commits.
+		É importante citar que há uma questão de paradigma envolvendo comandos
+		de revert e ferramentas de versionamento. Muitos desenvolvedores
+		defendem que um histórico de versionamento nunca deve ser revertido e os
+		bugs introduzidos em um commit devem ser corrigidos em commits
+		posteriores. Esse é um ponto de vista que deve ser levado em
+		consideração ao se adotar uma estratégia de versionamento. Porém, como
+		foi dito no começo do post, se o comando reset for utilizado com
+		responsabilidade, dificilmente algo que seja irreversível acontecerá.
+		</p>
 	</body>
 </html>

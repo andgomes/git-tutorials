@@ -21,14 +21,14 @@
 
 		<p>
 		Antes de falar sobre os tipos de reset, é importante entender as três
-		áreas lógicas de um repositório Git que serão afetadas pelo comando: o ponteiro HEAD, a área de stage e o diretório de working. O
-		ponteiro HEAD aponta para o último grupo de alterações(snapshot)
-		comitado. Podemos alterar para qual commit o HEAD aponta executando o
-		comando commit ou o reset, como veremos. A área index, também chamada
-		área de stage, contém o próximo snapshot a ser commitado. Alteramos a
-		área de index quando executamos o comando add. Por fim, o diretório
-		de working contém as alterações que ainda não foram adicionadas à área
-		de stage.
+		áreas lógicas de um repositório Git que serão afetadas pelo comando: o
+		ponteiro HEAD, a área de stage e o diretório de working. O ponteiro HEAD
+		aponta para o último grupo de alterações(snapshot) comitado. Podemos
+		alterar para qual commit o HEAD aponta executando o comando commit ou o
+		reset, como veremos. A área index, também chamada área de stage, contém
+		o próximo snapshot a ser commitado. Alteramos a área de index quando
+		executamos o comando add. Por fim, o diretório de working contém as
+		alterações que ainda não foram adicionadas à área de stage.
 		</p>
 		
 		<p>
@@ -42,12 +42,18 @@
 		<p>
 		O primeiro tipo de reset é utilizado com a opção --soft e move apenas o
 		ponteiro HEAD para algum outro commit, sem alterar a área de stage ou o
-		diretório de working. Essa é a opção mais segura entre as três, pois
-		caso seja executada por engano, todo o trabalho atual ainda está
-		acessível. Como exemplo, imagine que em um repositório aconteceram três
-		commits e não houve nenhuma alteração de arquivos depois do último
-		commit, ou seja, as áreas de stage e o diretório de working estão
-		exatamente iguais ao commit mais recente.
+		diretório de working. É importante notar que, de fato, a operação moverá
+		o branch para o qual o HEAD aponta e, por consequência, moverá também o
+		ponteiro HEAD.
+		</p>
+
+		<p>
+		Essa opção é a mais segura entre as três, pois caso seja executada por
+		engano, todo o trabalho atual ainda está acessível. Como exemplo,
+		imagine que em um repositório aconteceram três commits e não houve
+		nenhuma alteração de arquivos depois do último commit, ou seja, as áreas
+		de stage e o diretório de working estão exatamente iguais ao commit mais
+		recente.
 		</p>
 
 		<p>
@@ -71,9 +77,9 @@
 		</p>
 
 		<p>
-		Observe que, ao invés do parent do commit atual(HEAD~), poderíamos
-		especificar qualquer commit alcançável pelo ponteiro HEAD pelo seu
-		código SHA-1. Por exemplo, executar o comando
+		Outro ponto importante a observar é que, ao invés do parent do commit
+		atual(HEAD~), poderíamos especificar qualquer commit alcançável pelo
+		ponteiro HEAD pelo seu código SHA-1. Por exemplo, executar o comando
 		</p>
 
 		<p>

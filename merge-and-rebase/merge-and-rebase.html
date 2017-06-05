@@ -9,16 +9,16 @@
 		<h1>Diferenças entre os comandos Rebase e Merge</h1>
 
 		<p>
-		Neste tutorial, veremos os dois comandos mais comuns de junção de branches:
-		o merge e o rebase. Utilizando exemplos, vamos tentar entender como um
-		mesmo resultado de merge pode ser obtido de duas maneiras diferentes e as implicações
-		na história do versionamento do projeto e no processo de merge de branches
-		em repositórios remotos.
+		Neste tutorial, veremos os dois comandos mais comuns de junção de
+		branches: o merge e o rebase. Utilizando exemplos, vamos tentar entender
+		como um mesmo resultado de merge pode ser obtido de duas maneiras
+		diferentes e as implicações na história do versionamento do projeto e no
+		processo de merge de branches em repositórios remotos.
 		</p>
 
 		<p>
-		Imagine que em um repositório remoto temos o seguinte histórico de versionamento
-		e iremos cloná-lo em um repositório local:
+		Como exemplo, imagine que em um repositório remoto temos o seguinte
+		histórico de versionamento e iremos cloná-lo em um repositório local:
 		</p>
 
 		<p>
@@ -34,14 +34,14 @@
 		</p>
 
 		<p>
-		Suponha que criamos um branch chamado hotfix para corrigir um bug e executamos
-		um commit neste branch:
+		Suponha que criamos um branch chamado hotfix para corrigir um bug e
+		executamos um commit neste branch:
 		</p>
 
 		<p>
 		$ git branch hotfix
 		$ git checkout hotfix
-		// Corrigindo bug
+		// Corrigindo bug...
 		$ git add --all
 		$ git commit -m "Bug corrigido"
 		</p>
@@ -51,9 +51,9 @@
 		</p>
 
 		<p>
-		Corrigido o bug, subimos o branch hotfix para o repositório remoto para
-		que o adminstrador possa fazer o merge do branch master com o nosso branch
-		recém-criado.
+		Com o bug corrigido, subimos o branch hotfix para o repositório remoto
+		para que o adminstrador possa fazer o merge do branch master com o nosso
+		branch recém-criado.
 		</p>
 
 		<p>
@@ -61,11 +61,15 @@
 		</p>
 
 		<p>
+		---imagem do repositório remoto(três commits do master e um do hotfix)---
+		</p>
+
+		<p>
 		O administrador, ao receber uma notificação do colaborador de que um
 		branch com o bug corrigido foi criado no repositório remoto, executa o
 		comando merge e, como o branch master é ancestral do branch hotfix, o
-		Git utiliza a estratégia Fast-Forward, apenas aplicando as alterações
-		do hotfix no master.
+		Git utiliza a estratégia Fast-Forward, apenas aplicando as alterações do
+		hotfix no master.
 		</p>	
 
 		<p>
@@ -85,6 +89,75 @@
 
 		<p>
 		$ git push --delete hotfix
+		</p>
+
+		<p>
+		Perceba que nesse caso assumimos que o adminstrador do repositório
+		remoto não executou nenhum commit durante a correção do bug pelo
+		colaborador. Vejamos o que mudaria se isto acontecer.
+		</p>
+
+		<p>
+		Suponha que, enquanto o colaborador está subindo o novo commit com o bug
+		corrigido, um novo commit foi feito no repositório remoto. Depois que o
+		colaborador subir o branch, o repositório remoto ficará como no seguinte
+		estado:
+		</p>
+
+		<p>
+		---imagem do repositório remoto(três commits do master, um do hotfix)---
+		</p>
+
+		<p>
+		Quando o adminstrador do repositório master fizer o merge do branch
+		master com o branch hotfix, alguns conflitos podem acontecer. Depois de
+		resolvidos os conflitos, o adminstrador faz um commit e atualiza o
+		branch master no repositório remoto.
+		</p>
+
+		<p>
+		$ git fetch origin
+		$ git merge origin/hotfix
+		// Resolvendo os conflitos...
+		$ git commit
+		$ git push origin master
+		</p>
+
+		<p>
+		---imagem do repositório remoto(merge commit adicionado)---
+		</p>
+
+		<p>
+		É importante perceber que no primeiro caso, onde não houve nenhuma
+		alteração no repositório remoto antes de o branch hotfix ter sido
+		criado, o Git não precisou criar nenhum outro commit nem houve
+		conflitos. O motivo é que, como o branch hotfix foi criado a partir do
+		estado atual do master, nenhuma divergência de versões dos arquivos
+		ocorreu, em outras palavras, o commit do branch hotfix é apenas uma
+		continuação da história do master. Nesse caso, a estratégia Fast-Forward
+		foi utilizada pelo Git. Já no segundo caso, a história do master
+		divergiu da história do hotfix, ou seja, este não é mais uma continuação
+		daquele. A estratégia adotada pelo Git quando isso acontece é a chamada
+		Three-Way Merge, onde os commits mais recentes dos dois branches e o
+		ancestral comum dos dois são comparados para indicar quais conflitos
+		terão que ser resolvidos antes de se concluir a operação de merge. Por
+		exemplo, no nosso projeto os commits tal, tal e tal seriam comparados.
+		Com os conflitos resolvidos, um novo commit representando esse merge é
+		criado.
+		</p>
+
+		<p>
+		Ao analisarmos a última situação, onde o adminstrador do repositório
+		remoto precisa resolver os conflitos de merge entre os branches, vemos
+		que o processo fica um pouco mais trabalhoso. Toda vez que o colaborador
+		subir um commit divergente do master, o administrador precisará resolver
+		conflitos novamente. Isso para um colaborador, agora imagine um cenário
+		onde há dezenas de colaboradores. O workflow se torna inviável para os
+		adminstradores. Em um cenário ideal, tudo que o adminstrador precisaria
+		fazer seria executar um comando merge e um Fast-Forward aconteceria, sem
+		branches divergentes ou conflitos. É aqui que introduzimos o comando
+		rebase, uma alternativa para junção de branches de forma a evitar
+		conflitos na execução de um merge.
 		</p>
 
 	</body>

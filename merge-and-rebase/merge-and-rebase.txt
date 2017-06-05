@@ -1,0 +1,9 @@
+git merge sem conflitos
+Fast-Forward
+git merge com conflitos
+Three-Way Merge
+Problema dos conflitos para o adm(gancho para o rebase)
+workflow do rebase
+nem tudo são flores(conflitos ainda podem acontecer ao subir atualização ao mesmo tempo)
+cuidados ao se utilizar o rebase em repositórios remotos(a história alterada)
+a discussão sobre a história de versionamento de um projeto

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Entendendo as Estratégias de Merge Fast-Forward e Three-Way</title>
+	</head>
+	<body>
+		<h1>Entendendo as Estratégias de Merge Fast-Forward e Three-Way</h1>
+		
+		<p>
+		Neste post irei tentar explicar de forma simples com alguns exemplos e
+		figuras como funcionam as duas estratégias que o Git utiliza ao realizar
+		um merge entre dois branches.
+		</p>
+		
+		<p>
+		Como exemplo, imagine que em repositório aconteceram três commits
+		anteriormente e um bug foi descoberto depois do último commit.
+		</p>
+		
+		<p>
+		---repositório: três commits, branch master no último---
+		</p>
+		
+		<p>
+		Para corrigir esse bug, um branch chamado bugfix foi criado e, feita a
+		correção, um novo commit nesse branch foi realizado para que o branch
+		master pudesse ser atualizado para um estado estável, sem a falha
+		anteriormente introduzida.
+		</p>
+		
+		<p>
+		---repositório: quatro commits, master no penúltimo, bugfix no último---
+		</p>
+		
+		<p>
+		Deixemos o repositório nesse estado e vamos assumir o controle. Precisamos
+		fazer com que o branch master seja atualizado para o commit mais recente
+		realizado no branch bugfix. Para isso, iremos fazer checkout no master
+		e executar o comando merge e observar a estratégia utilizada pelo Git.
+		</p>
+		
+		<p>
+		$ git checkout master <br />
+		$ git merge bugfix <br />
+		</p>
+		
+		<p>
+		Updating 1c67a7c..ffcfa2b <br />
+		Fast-forward <br />
+		</p>
+		
+		<p>
+		---repositório: quatro commits, master e bugfix no último---
+		</p>
+	</body>
+</html>

@@ -30,24 +30,16 @@
 		</p>
 
 		<p>
-		---imagem do repositório local(três commit em sequência)---
-		</p>
-
-		<p>
 		Suponha que criamos um branch chamado hotfix para corrigir um bug e
 		executamos um commit neste branch:
 		</p>
 
 		<p>
-		$ git branch hotfix
-		$ git checkout hotfix
-		// Corrigindo bug...
-		$ git add --all
+		$ git branch hotfix <br />
+		$ git checkout hotfix <br />
+		// Corrigindo bug... <br />
+		$ git add --all <br />
 		$ git commit -m "Bug corrigido"
-		</p>
-
-		<p>
-		---imagem do repositório local(três commit em sequência e um do hotfix)---
 		</p>
 
 		<p>
@@ -73,8 +65,8 @@
 		</p>	
 
 		<p>
-		$ git fetch origin
-		$ git merge master origin/hotfix
+		$ git fetch origin <br />
+		$ git merge master origin/hotfix <br />
 		$ git push origin master
 		</p>
 
@@ -116,10 +108,10 @@
 		</p>
 
 		<p>
-		$ git fetch origin
-		$ git merge origin/hotfix
-		// Resolvendo os conflitos...
-		$ git commit
+		$ git fetch origin <br />
+		$ git merge origin/hotfix <br />
+		// Resolvendo os conflitos... <br />
+		$ git commit <br />
 		$ git push origin master
 		</p>
 
@@ -159,6 +151,85 @@
 		rebase, uma alternativa para junção de branches de forma a evitar
 		conflitos na execução de um merge.
 		</p>
-
+		
+		<p>
+		Para vermos o comando rebase em ação, vamos imaginar uma situação
+		semelhante à anterior, onde um colaborador, depois de ter clonado o
+		repositório remoto, cria um branch diferente do master e corrige um bug.
+		Porém, antes de subir o branch com o comando push, o colaborar faz um
+		fetch do repositório remoto e em seguida executa um rebase do novo
+		branch com o branch origin/master.
+		</p>
+		
+		<p>
+		---imagem do repositório local(três commits do master e um do hotfix)---
+		</p>
+		
+		<p>
+		$ git branch hotfix <br />
+		$ git checkout hotfix <br />
+		// Corrigindo bug... <br />
+		$ git add --all <br />
+		$ git commit -m "Bug corrigido"
+		</p>
+		
+		<p>
+		Agora suponha que nesse meio tempo o adminstrador do repositório tenha
+		subido um novo commit no branch master e o colaborador obtenha esse commit
+		para o repositório local com o comando fetch.
+		</p>
+		
+		<p>
+		$ git fetch origin
+		</p>
+		
+		<p>
+		---imagem do repositório local(quatro commits do master e um do hotfix)---
+		</p>
+		
+		<p>
+		O colaborar então, para juntar os branches divergentes, executa o
+		comando rebase e sobe o novo commit criado para o servidor.
+		</p>
+		
+		<p>
+		$ git rebase origin/master <br />
+		$ git push -u origin hotfix
+		</p>
+		
+		<p>
+		---imagem do repositório remoto(novo commit adicionado)---
+		</p>
+		
+		<p>
+		Observe que a principal característica do comando rebase é a não criação
+		de histórias divergentes no histórico de commits. Ao invés disso, todas
+		as alterações adicionadas no commit são adicionadas no histórico como
+		se fossem de um commit imediatamente ao último commit do repositório.
+		</p>
+		
+		<p>
+		Agora, quando o administrador do repositório remoto validar o novo commit
+		do colaborador, ele só terá que executar o merge com o branch hotfix e
+		um fast-forward acontecerá, já que o novo commit subido pelo colaborador
+		está inteiramente baseado no último commit do repositório remoto.
+		</p>
+		
+		<p>
+		---imagem do repositório remoto(merge e fast-forward)---
+		</p>
+		
+		<p>
+		É importante notar que, ao executar o comando rebase, conflitos podem
+		acontecer se o comando fetch trouxer commits mais recentes ao commit a
+		partir do qual o branch hotfix foi criado, em outras palavras, se, no
+		momento em que o bug está sendo corrigido, o adminstrador sobe um novo
+		commit no branch master do repositório remoto. Porém, ao se utilizar o
+		rebase, a responsabilidade de resolver os conflitos do rebase é do
+		colaborador, já que o rebase é executado antes de subir o commit para o
+		servidor, o que faz desse comando uma ferramenta de muita utilidade em
+		projetos de médio e grande porte.
+		</p>
+		
 	</body>
 </html>

@@ -34,24 +34,119 @@
 		</p>
 		
 		<p>
-		Deixemos o repositório nesse estado e vamos assumir o controle. Precisamos
-		fazer com que o branch master seja atualizado para o commit mais recente
-		realizado no branch bugfix. Para isso, iremos fazer checkout no master
-		e executar o comando merge e observar a estratégia utilizada pelo Git.
+		Deixemos o repositório nesse estado e vamos assumir o controle.
+		Precisamos fazer com que o branch master seja atualizado para o commit
+		mais recente realizado no branch bugfix. Para isso, iremos fazer
+		checkout no master e executar o comando merge e observar a estratégia
+		utilizada pelo Git.
 		</p>
 		
 		<p>
 		$ git checkout master <br />
-		$ git merge bugfix <br />
+		$ git merge bugfix
 		</p>
 		
 		<p>
 		Updating 1c67a7c..ffcfa2b <br />
-		Fast-forward <br />
+		Fast-forward
 		</p>
 		
 		<p>
 		---repositório: quatro commits, master e bugfix no último---
+		</p>
+		
+		<p>
+		Nesse caso, o único trabalho do Git foi aplicar as alterações feitas no
+		commit do bugfix e atualizar o branch master para o último commit, por
+		isso o nome fast-forward. É importante notar que nessa estratégia nunca
+		acontecerão conflitos de merge, por que os commits mais recentes em
+		outros branches são totalmente baseados no commit para o qual o master
+		aponta.
+		</p>
+		
+		<p>
+		Portanto, podemos concluir que a única situação onde podem acontecer
+		conflitos de merge é na junção de dois branchs que apontam para commits
+		divergentes na história de versionamento. Por exemplo, imagine que
+		enquanto o bug estava sendo corrigido no branch bugfix, um commit foi
+		realizado no master. Quando o commit do bugfix for executado, os dois
+		branches divergirão na história do repositório:
+		</p>
+		
+		<p>
+		---repositório: cinco commits, sendo que dois são divergentes, branches master e bugfix---
+		</p>
+		
+		<p>
+		Vamos fazer checkout no branch master e realizar um merge com o bugfix e
+		ver o que acontece.
+		</p>
+		
+		<p>
+		$ git checkout master <br />
+		$ git merge bugfix
+		</p>
+		
+		<p>
+		Mesclagem automática... <br />
+		Merge made by the 'recursive' strategy.
+		</p>
+		
+		<p>
+		---repositório: resultado da junção dos branches master e bugfix, bugfix inalterado, master aponta para o último---
+		</p>
+		
+		<p>
+		Na estratégia recursiva(tecnicamente conhecida como Three-Way), o Git
+		compara os dois branches mais o commit que é ancestral comum dos dois e,
+		se não houver nenhum conflito(como alterações na mesma linha), aplica as
+		mudanças introduzidas pelos dois branches em um novo commit.
+		</p>
+		
+		<p>
+		Como exemplo para ficar mais claro ainda, imagine que os dois branches
+		em questão(master e bugfix) alteraram o seguinte arquivo.
+		</p>
+		
+		<p>
+		x = 2
+		if x &lt; 1:
+			print("x is greater than 1")
+		print("Goodbye!")
+		</p>
+		
+		<p>
+		x = 2
+		if x &gt; 1: // linha alterada no branch bugfix
+			print("x is greater than 1")
+		print("Goodbye!")
+		</p>
+		
+		<p>
+		x = 2
+		if x &lt; 1:
+			print("x is greater than 1")
+		print("See you later!") // linha alterada no branch master
+		</p>
+		
+		<p>
+		O resultado do merge dos dois branches será o seguinte:
+		</p>
+		
+		<p>
+		x = 2
+		if x &gt; 1: // linha alterada no branch bugfix
+			print("x is greater than 1")
+		print("See you later!") // linha alterada no branch master
+		</p>
+		
+		<p>
+		Por motivos de simplicidade, supomos que não houve nenhum conflito na
+		execução do merge em nenhum exemplo. Mas caso houvesse algum, a única
+		diferença desse tutorial seria que o commit da junção dos dois branches
+		não seria realizado automaticamente, ou seja, depois de executar o
+		merge, teríamos que resolver os conflitos primeiro e depois executar o
+		commit.
 		</p>
 	</body>
 </html>

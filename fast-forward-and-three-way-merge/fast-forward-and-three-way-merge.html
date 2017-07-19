@@ -2,6 +2,7 @@
 
 <html>
 	<head>
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Entendendo as Estratégias de Merge Fast-Forward e Three-Way</title>
 	</head>
 	<body>
@@ -24,9 +25,8 @@
 		
 		<p>
 		Para corrigir esse bug, um branch chamado bugfix foi criado e, feita a
-		correção, um novo commit nesse branch foi realizado para que o branch
-		master pudesse ser atualizado para um estado estável, sem a falha
-		anteriormente introduzida.
+		correção, um commit com o código estável foi realizado nesse mesmo
+		branch.
 		</p>
 		
 		<p>
@@ -66,7 +66,7 @@
 		
 		<p>
 		Portanto, podemos concluir que a única situação onde podem acontecer
-		conflitos de merge é na junção de dois branchs que apontam para commits
+		conflitos de merge é na junção de dois branches que apontam para commits
 		divergentes na história de versionamento. Por exemplo, imagine que
 		enquanto o bug estava sendo corrigido no branch bugfix, um commit foi
 		realizado no master. Quando o commit do bugfix for executado, os dois
@@ -109,23 +109,23 @@
 		</p>
 		
 		<p>
-		x = 2
-		if x &lt; 1:
-			print("x is greater than 1")
+		x = 2 <br />
+		if x &lt; 1: <br />
+	    ----print("x is greater than 1") <br />
 		print("Goodbye!")
 		</p>
 		
 		<p>
-		x = 2
-		if x &gt; 1: // linha alterada no branch bugfix
-			print("x is greater than 1")
+		x = 2 <br />
+		if x &gt; 1: // linha alterada no branch bugfix <br />
+		----print("x is greater than 1") <br />
 		print("Goodbye!")
 		</p>
 		
 		<p>
-		x = 2
-		if x &lt; 1:
-			print("x is greater than 1")
+		x = 2 <br />
+		if x &lt; 1: <br />
+		----print("x is greater than 1") <br />
 		print("See you later!") // linha alterada no branch master
 		</p>
 		
@@ -134,16 +134,16 @@
 		</p>
 		
 		<p>
-		x = 2
-		if x &gt; 1: // linha alterada no branch bugfix
-			print("x is greater than 1")
+		x = 2 <br />
+		if x &gt; 1: // linha alterada no branch bugfix <br />
+		----print("x is greater than 1") <br />
 		print("See you later!") // linha alterada no branch master
 		</p>
 		
 		<p>
 		Por motivos de simplicidade, supomos que não houve nenhum conflito na
 		execução do merge em nenhum exemplo. Mas caso houvesse algum, a única
-		diferença desse tutorial seria que o commit da junção dos dois branches
+		diferença nesse tutorial seria que o commit da junção dos dois branches
 		não seria realizado automaticamente, ou seja, depois de executar o
 		merge, teríamos que resolver os conflitos primeiro e depois executar o
 		commit.

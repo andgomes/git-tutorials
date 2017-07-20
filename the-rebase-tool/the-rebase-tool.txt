@@ -1,0 +1,10 @@
+motivação(facilitar o trabalho do mantedor do repositório remoto)
+exemplo(clonagem de um repositório remoto)
+criação de um branch para contribuir
+acontece commit no origin/master
+o comando rebase
+git fetch
+git rebase
+git push
+adminstrador faz fast-forward
+se usasse git merge(várias ramificações a cada commit novo no master)

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Realizando Merges com o Comando Rebase</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<h1>Realizando Merges com o Comando Rebase</h1>
+		
+		<p>
+		Nos posts anteriores, vimos que é possível fazer merge de dois branches
+		com o comando merge e que na história de versionamento do repositório,
+		se se tratarem de dois branches divergentes, surgem ramificações que
+		posteriormente se unem ao branch principal. Em projetos mais complexos,
+		a quantidade de branches e, consequentemente, a quantidade de
+		ramificações na história do repositório, pode ser elevada e o processo
+		de merge desses branches pode se tornar trabalhoso. Quando se trata de
+		um repositório que queremos colaborar mas não temos permissão de alterar
+		o master, muitas vezes precisamos seguir algumas regras que facilite o
+		trabalho do mantedor do projeto. Uma das regras mais comuns é que nossas
+		colaborações sigam uma história linear para que sejam passíveis de
+		fast-forward, ou seja, que não gerem conflitos ao serem utilizadas em um
+		merge com o branch principal.
+		</p>
+		
+		<p>
+		Nessa situação, ao utilizarmos a estratégia de merge que conhecemos, só
+		temos uma alternativa:
+		criar um branch a partir do commit atual do master, concluir as alterações
+		e torcer para que nenhum novo commit tenha sido realizado no branch
+		master do repositório remoto, caso contrário, quando o branch for enviado
+		para o servidor, ele surgirá como uma ramificação de um commit anterior
+		e correrá o risco de introduzir conflitos se for unido ao branch master
+		em um merge, um trabalho que o mantedor do repositório não quer.
+		</p>
+		
+		<p>
+		Por isso devemos utilizar uma solução que, independente de quantos commits
+		foram realizados no master enquanto estávamos trabalhando no nosso branch,
+		nos permita alterar o histórico de commits simulando que todas as nossas
+		alterações foram baseadas no commit mais recente do branch principal. Para
+		isso recorremos ao comando rebase.
+		</p>
+	</body>
+</html>

@@ -15,32 +15,84 @@
 		posteriormente se unem ao branch principal. Em projetos mais complexos,
 		a quantidade de branches e, consequentemente, a quantidade de
 		ramificações na história do repositório, pode ser elevada e o processo
-		de merge desses branches pode se tornar trabalhoso. Quando se trata de
-		um repositório que queremos colaborar mas não temos permissão de alterar
-		o master, muitas vezes precisamos seguir algumas regras que facilite o
-		trabalho do mantedor do projeto. Uma das regras mais comuns é que nossas
-		colaborações sigam uma história linear para que sejam passíveis de
-		fast-forward, ou seja, que não gerem conflitos ao serem utilizadas em um
-		merge com o branch principal.
+		de merge desses branches pode se tornar trabalhoso.
+		</p>
+		
+		<p>
+		Quando se trata de um repositório que queremos colaborar mas não temos
+		permissão de alterar o master, muitas vezes precisamos seguir algumas
+		regras que facilite o trabalho do mantedor do projeto. Uma das regras
+		mais comuns é que nossas colaborações sigam uma história linear para que
+		sejam passíveis de fast-forward, ou seja, que não gerem conflitos ao
+		serem utilizadas em um merge com o branch principal.
 		</p>
 		
 		<p>
 		Nessa situação, ao utilizarmos a estratégia de merge que conhecemos, só
-		temos uma alternativa:
-		criar um branch a partir do commit atual do master, concluir as alterações
-		e torcer para que nenhum novo commit tenha sido realizado no branch
-		master do repositório remoto, caso contrário, quando o branch for enviado
-		para o servidor, ele surgirá como uma ramificação de um commit anterior
-		e correrá o risco de introduzir conflitos se for unido ao branch master
-		em um merge, um trabalho que o mantedor do repositório não quer.
+		temos uma alternativa: criar um branch a partir do commit atual do
+		master, concluir as alterações e torcer para que nenhum novo commit
+		tenha sido realizado no branch master do repositório remoto, caso
+		contrário, quando o branch for enviado para o servidor, ele surgirá como
+		uma ramificação de um commit anterior e correrá o risco de introduzir
+		conflitos se for unido ao branch master em um merge, um trabalho que o
+		mantedor do repositório não quer.
 		</p>
 		
 		<p>
-		Por isso devemos utilizar uma solução que, independente de quantos commits
-		foram realizados no master enquanto estávamos trabalhando no nosso branch,
-		nos permita alterar o histórico de commits simulando que todas as nossas
-		alterações foram baseadas no commit mais recente do branch principal. Para
+		Por isso devemos utilizar uma solução que, independente de quantos
+		commits foram realizados no master enquanto estávamos trabalhando no
+		nosso branch, nos permita alterar o histórico de commits baseando todas
+		as nossas alterações no commit mais recente do branch principal. Para
 		isso recorremos ao comando rebase.
+		</p>
+		
+		<p>
+		Suponha que clonamos um repositório remoto com três commits no branch
+		master, criamos um branch chamado bugfix localmente e executamos dois
+		commits nesse branch:
+		</p>
+		
+		<p>
+		---repositório local: três commits no origin/master, dois commits no bugfix---
+		</p>
+		
+		<p>
+		Depois de concluídas as alterações, executamos um fetch e descobrimos
+		que mais dois commits foram realizados no master do servidor remoto.
+		</p>
+		
+		<p>
+		$ git fetch origin
+		</p>
+		
+		<p>
+		---repositório local: cinco commits no origin/master, dois commits no bugfix---
+		</p>
+		
+		<p>
+		Como nosso branch está divergindo da história linear do master, vamos
+		utilizar o comando rebase para que as nossas alterações se baseiem no
+		último commit do master.
+		</p>
+		
+		<p>
+		$ git rebase master
+		</p>
+		
+		<p>
+		---repositório local: cinco commits no origin/master, um no bugfix, linear---
+		</p>
+		
+		<p>
+		Veja que os dois commits que criamos no branch bugfix foram removidos e
+		um novo foi criado após o último commit do master. Agora podemos subir
+		nosso branch para o servidor como se tivessemos implementado nos
+		baseando no commit mais recente do repositório, possibilitando ao
+		mantedor do projeto executar um merge sem problemas de conflitos.
+		</p>
+		
+		<p>
+		$ git push -u origin bugfix
 		</p>
 	</body>
 </html>

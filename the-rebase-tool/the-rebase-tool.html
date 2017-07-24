@@ -74,21 +74,39 @@
 		utilizar o comando rebase para que as nossas alterações se baseiem no
 		último commit do master.
 		</p>
-		
+
 		<p>
 		$ git rebase master
 		</p>
-		
+
 		<p>
 		---repositório local: cinco commits no origin/master, um no bugfix, linear---
 		</p>
-		
+
 		<p>
 		Veja que os dois commits que criamos no branch bugfix foram removidos e
-		um novo foi criado após o último commit do master. Agora podemos subir
-		nosso branch para o servidor como se tivessemos implementado nos
-		baseando no commit mais recente do repositório, possibilitando ao
-		mantedor do projeto executar um merge sem problemas de conflitos.
+		dois novos foram criados após o último commit do master. Se verificarmos
+		o histórico de commits com o comando log, veremos que todas os dados dos
+		commits removidos(como autor, data e mensagem) foram copiados para os
+		novos. Caso ocorram conflitos em algum arquivo do repositório, depois de
+		resolvê-los temos que adicioná-los à área de stage com o comando add e
+		executar novamente o comando rebase com a opção continue. Por exemplo:
+		</p>
+
+		<p>
+		$ git rebase master
+		CONFLITO (conteúdo): conflito de mesclagem em file.txt
+		// resolvendo conflitos no arquivo file.txt...
+		$ git add file.txt
+		$ git rebase --continue
+		</p>
+
+		<p>
+		Agora podemos subir
+		nosso branch para o servidor como se tivessemos implementado as
+		alterações nos baseando no commit mais recente do repositório,
+		possibilitando ao mantedor do projeto executar um merge sem problemas de
+		conflitos.
 		</p>
 		
 		<p>

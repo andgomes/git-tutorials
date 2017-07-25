@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Removendo Arquivos de um Repositório</title>
+	</head>
+	<body>
+		<h1>Removendo Arquivos de um Repositório</h1>
+		
+		<p>
+		Neste post iremos aprender como deletar arquivos de um repositório
+		definitivamente e também como mover um arquivo da área de stage
+		adicionado por engano de volta para o diretório de working.
+		</p>
+				
+		<p>
+		Para remover um arquivo definitivamente, basta executar o comando rm do
+		Git e commitar a remoção. Por exemplo, se quisermos excluir o arquivo
+		file.txt e commitar essa alteração do repositório poderíamos executar
+		os comandos:
+		</p>
+		
+		<p>
+		$ git rm file.txt <br />
+		Mudanças a serem submetidas: <br /> <br />
+		--------deleted:----file2.txt <br /> <br />
+		$ git commit -m "file.txt removido"
+		</p>
+		
+		<p>
+		Note que o comando git rm remove o arquivo do diretório, como a
+		ferramenta rm do GNU/Linux, e já adiciona a remoção à área de stage,
+		pronta para ser commitada.
+		</p>
+	</body>
+</html>

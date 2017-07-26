@@ -10,15 +10,15 @@
 		
 		<p>
 		Neste post iremos aprender como deletar arquivos de um repositório
-		definitivamente e também como mover um arquivo da área de stage
-		adicionado por engano de volta para o diretório de working.
+		definitivamente e também como apagar arquivos que já foram adicionados à
+		área de stage.
 		</p>
-				
+		
 		<p>
-		Para remover um arquivo definitivamente, basta executar o comando rm do
-		Git e commitar a remoção. Por exemplo, se quisermos excluir o arquivo
-		file.txt e commitar essa alteração do repositório poderíamos executar
-		os comandos:
+		Para remover um arquivo no diretório de working, basta executar o
+		comando rm do Git e commitar a remoção. Por exemplo, se quisermos
+		excluir o arquivo file.txt e commitar essa alteração do repositório
+		poderíamos executar os comandos:
 		</p>
 		
 		<p>
@@ -32,6 +32,37 @@
 		Note que o comando git rm remove o arquivo do diretório, como a
 		ferramenta rm do GNU/Linux, e já adiciona a remoção à área de stage,
 		pronta para ser commitada.
+		</p>
+		
+		<p>
+		Uma situação bastante comum ao criarmos um repositório é esquecer de
+		listar determinado tipo de arquivo ou diretório no .gitignore e sem
+		querer adicioná-los à área de stage. Se tentarmos executar o comando git
+		rm em arquivo na área de stage teremos o seguinte resultado:
+		</p>
+		
+		<p>
+		error: the following file has changes staged in the index: <br />
+		file.txt <br />
+		(use --cached to keep the file, or -f to force removal)
+		</p>
+		
+		<p>
+		Como o Git nos avisa, quando um arquivo é alterado e adicionado à área
+		de stage, precisamos usar o comando rm com a opção --cached para
+		removê-lo. Depois podemos executar um commit para salvar a remoção.
+		</p>
+		
+		<p>
+		$ git rm --cached file.txt <br />
+		</p>
+		
+		<p>
+		É importante observar que o comando git rm só altera as áreas de stage e
+		de working, em outras palavras, arquivos que estejam sendo monitorados
+		pelo Git. Portanto, arquivos que não tenham sido adicionados com o
+		comando add permanecerão intactos, para removê-los podemos utilizar
+		utilitários do sistema(como o programa rm) ou a interface gráfica.
 		</p>
 	</body>
 </html>

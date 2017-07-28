@@ -1,0 +1,10 @@
+motivação(equipes médias e grandes)
+os passos do workflow resumidos
+exemplo com um colaborador
+colaborador clona e sobe para o seu repositório remoto
+colaborador cria branch, faz alguns commits e sobe as alterações
+colaborador notifica ao mantedor do repositório original
+mantedor adiciona o remoto do colaborador, faz o merge localmente
+	e sobe as alterações
+colaborador faz pull e continua a desenvolver
+recomendações: apply cleanly e branchs diferentes do master

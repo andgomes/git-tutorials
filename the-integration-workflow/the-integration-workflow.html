@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Colaborando com um Workflow de Integração</title>
+	</head>
+	<body>
+		<h1>Colaborando com um Workflow de Integração</h1>
+		
+		<p>
+		Neste post iremos entender como funciona o workflow de integração e
+		porque esse workflow é o mais indicado para equipes de tamanho médio(
+		algo em torno de dez desenvolvedores) onde dar acesso de modificação
+		para todo o time pode se tornar um problema.
+		</p>
+		
+		<p>
+		Diferentemente de um workflow centralizado, onde um único repositório
+		remoto é utilizado por todo o time, no workflow de integração existirá
+		um repositório remoto "oficial", onde as alterações dos colaboradores
+		poderão ser incorporadas ao master, e cada desenvolvedor(ou subgrupo de
+		desenvolvedores) terá um repositório remoto
+		separado para submeter suas alterações.
+		</p>
+		
+		<p>
+		De forma simplificada, podemos dividir o workflow em n fases: <br /> <br />
+		Colaborador: <br />
+		1. clona o repositório oficial <br />
+		2. adiciona um repositório remoto <br />
+		3. cria um branch e commita as alterações nesse branch <br />
+		4. sobe o branch para o seu repositório remoto <br />
+		5. notifica ao mantedor do repositório oficial que tem atualizações
+		disponíveis. <br /> <br />
+		Mantedor do Repositório Oficial: <br />
+		6. adiciona o remoto do colaborador <br />
+		7. faz fetch <br />
+		8. se aceitar as modificações: <br />
+		8.1. faz o merge do master com o remote/branch <br />
+		8.2. sobe o master para o repositório oficial com as atualizações <br />
+		9. notifica aos colaboradores para fazerem pull do repositório oficial. <br /><br />
+		Colaborador: <br />
+		10. executa um pull origin e continua a desenvolver normalmente
+		</p>
+	</body>
+</html>

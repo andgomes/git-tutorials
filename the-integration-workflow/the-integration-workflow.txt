@@ -9,4 +9,4 @@ mantedor adiciona o remoto do colaborador, faz o merge localmente
 colaborador faz pull e continua a desenvolver
 vantagens: múltiplos repositórios de backup, os colaboradores podem desenvolver
 suas próprias versões do projeto separadamente
-recomendações: apply cleanly e branchs diferentes do master
+recomendações: apply cleanly(pull e rebase antes) e branchs diferentes do master

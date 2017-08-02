@@ -24,7 +24,7 @@
 		</p>
 		
 		<p>
-		De forma simplificada, podemos dividir o workflow em n fases: <br /> <br />
+		De forma simplificada, podemos dividir o workflow em 10 fases: <br /> <br />
 		Colaborador: <br />
 		1. clona o repositório oficial <br />
 		2. adiciona um repositório remoto <br />
@@ -53,11 +53,120 @@
 		</p>
 		
 		<p>
-		$ git clone http://remote.repo.central
+		$ git clone url_repositório_central
 		</p>
 		
 		<p>
 		---repositório local---
+		</p>
+		
+		<p>
+		Como o colaborador vai subir as alterações para o seu repositório remoto,
+		ele precisa adicioná-lo ao repositório local com o comando remote e
+		fazer push do estado atual para servidor.
+		</p>
+		
+		<p>
+		$ git remote add myremote url_repositório_de_colaboração
+		$ git push myremote master
+		</p>
+		
+		<p>
+		Agora o repositório remoto do colaborador possui uma cópia do
+		repositório remoto central do qual fizemos clone. Perceba que fizemos
+		essa cópia de repositórios manualmente, mas alguns servições de
+		gerenciamente de repositórios, como GitHub e GitLab, fazem isso de forma
+		automática com apenas alguns cliques.
+		</p>
+		
+		<p>
+		Continuando o nosso workflow, suponha que o colaborador criou um branch
+		chamado bugfix para corrigir um bug que ele encontrou no código do
+		projeto, fez alguns commits e então subiu as alterações para o seu
+		repositório remoto.
+		</p>
+		
+		<p>
+		---repositório remoto do colaborador---
+		</p>
+		
+		<p>
+		Concluída as alterações, o colaborador então notifica ao mantedor do
+		repositório original que possui um repositório clonado com um bug
+		corrigido e lhe envia a url do repositório. O mantedor do repositório
+		original então adiciona o repositório remoto do colaborador com o
+		comando remote e faz fetch para trazer as alterações adicionadas.
+		</p>
+		
+		<p>
+		$ git remote add colaborador_remote url_repositório_de_colaboração
+		$ git fetch colaborador_remote
+		</p>
+		
+		<p>
+		---repositório local do mantedor original---
+		</p>
+		
+		<p>
+		Se o mantedor aceitar as alterações do colaborador, ele só precisa fazer
+		merge do seu master com o colaborador_remote/bugfix e subir as
+		alterações para o repositório remoto central.
+		</p>
+		
+		<p>
+		$ git checkout master
+		$ git branch colaborador_remote/bugfix
+		$ git push origin master
+		</p>
+		
+		<p>
+		---repositório remoto central---
+		</p>
+		
+		<p>
+		Com o repositório original atualizado, o colaborador só precisa fazer um
+		pull para trazer as atualizações do origin/master e continuar
+		contribuindo.
+		</p>
+		
+		<p>
+		$ git pull origin master
+		</p>
+		
+		<p>
+		---repositório local do colaborador---
+		</p>
+		
+		<p>
+		A maior vantagem do workflow de integração, além de facilitar o trabalho
+		do mantedor do projeto, é a decentralização do desenvolvimento em vários
+		repositórios remotos, evitando que os desenvolvedores dependam da
+		disponibilidade do mantedor do repositório remoto original, podendo
+		continuar o desenvolvimento no seu ritmo, sem se preocupar com o que
+		acontece no repositório original. Outra vantagem secundária da
+		decentralização de código é que os repositórios remotos clonados servem
+		como backup para o servidor original, se houver perda desse, basta
+		clonar o mais recentemente atualizado dos repositórios de colaboração e
+		as perdas serão minimizadas.
+		</p>
+		
+		<p>
+		Para que o workflow seja aplicado de forma mais eficiente, é recomendado
+		que as alterações nos repositórios clonados sejam feitas em branchs
+		diferentes do master. O motivo é que, se o master for alterado com novos
+		commits, quando quisermos atualizar esse branch com o comando pull
+		trazendo as alterações do repositório original, como fizemos no último
+		passo, conflitos de merge podem ser introduzidos, dificultando a
+		manutenção do repositório remoto.
+		</p>
+		
+		<p>
+		Outra recomendação é que as colaborações nos repositório remoto, quando
+		notificadas ao mantedor do projeto original, sejam passíveis de
+		fast-forward, ou seja, que não possibilitem conflitos de merge, evitando
+		que as alterações sejam rejeitadas pelo mantedor do repositório central.
+		Como vimos no post -link-, podemos contornar tal restrição facilmente
+		com o comando rebase.
 		</p>
 	</body>
 </html>

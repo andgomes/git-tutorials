@@ -3,6 +3,7 @@
 <html>
 	<head>
 		<title>Colaborando com um Workflow de Integração</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	</head>
 	<body>
 		<h1>Colaborando com um Workflow de Integração</h1>
@@ -10,7 +11,7 @@
 		<p>
 		Neste post iremos entender como funciona o workflow de integração e
 		porque esse workflow é o mais indicado para equipes de tamanho médio(
-		algo em torno de dez desenvolvedores) onde dar acesso de modificação
+		algo em torno de dez desenvolvedores), onde dar acesso de modificação
 		para todo o time pode se tornar um problema.
 		</p>
 		
@@ -19,15 +20,15 @@
 		remoto é utilizado por todo o time, no workflow de integração existirá
 		um repositório remoto "oficial", onde as alterações dos colaboradores
 		poderão ser incorporadas ao master, e cada desenvolvedor(ou subgrupo de
-		desenvolvedores) terá um repositório remoto
-		separado para submeter suas alterações.
+		desenvolvedores) terá um repositório remoto separado para submeter suas
+		alterações.
 		</p>
 		
 		<p>
-		De forma simplificada, podemos dividir o workflow em 10 fases: <br /> <br />
+		De forma simplificada, podemos dividir o workflow em 11 fases: <br /> <br />
 		Colaborador: <br />
 		1. clona o repositório oficial <br />
-		2. adiciona um repositório remoto <br />
+		2. adiciona um repositório remoto separado <br />
 		3. cria um branch e commita as alterações nesse branch <br />
 		4. sobe o branch para o seu repositório remoto <br />
 		5. notifica ao mantedor do repositório oficial que tem atualizações
@@ -36,11 +37,11 @@
 		6. adiciona o remoto do colaborador <br />
 		7. faz fetch <br />
 		8. se aceitar as modificações: <br />
-		8.1. faz o merge do master com o remote/branch <br />
+		8.1. faz o merge do master com o branch do repositório do colaborador <br />
 		8.2. sobe o master para o repositório oficial com as atualizações <br />
-		9. notifica aos colaboradores para fazerem pull do repositório oficial. <br /><br />
+		8.3. notifica aos colaboradores para fazerem pull do repositório oficial. <br /><br />
 		Colaborador: <br />
-		10. executa um pull origin e continua a desenvolver normalmente
+		9. executa um pull origin e continua a desenvolver normalmente
 		</p>
 		
 		<p>
@@ -61,14 +62,18 @@
 		</p>
 		
 		<p>
-		Como o colaborador vai subir as alterações para o seu repositório remoto,
-		ele precisa adicioná-lo ao repositório local com o comando remote e
-		fazer push do estado atual para servidor.
+		Como o colaborador vai subir as alterações para o seu repositório
+		remoto, ele precisa adicioná-lo ao repositório local com o comando
+		remote e fazer push do estado atual do repositório para servidor.
 		</p>
 		
 		<p>
-		$ git remote add myremote url_repositório_de_colaboração
+		$ git remote add myremote url_repositório_de_colaboração <br />
 		$ git push myremote master
+		</p>
+		
+		<p>
+		---repositório remoto do colaborador---
 		</p>
 		
 		<p>
@@ -99,8 +104,8 @@
 		</p>
 		
 		<p>
-		$ git remote add colaborador_remote url_repositório_de_colaboração
-		$ git fetch colaborador_remote
+		$ git remote add colaborador_remote url_repositório_de_colaboração <br />
+		$ git fetch colaborador_remote bugfix
 		</p>
 		
 		<p>
@@ -109,13 +114,13 @@
 		
 		<p>
 		Se o mantedor aceitar as alterações do colaborador, ele só precisa fazer
-		merge do seu master com o colaborador_remote/bugfix e subir as
+		merge do master com o branch colaborador_remote/bugfix e subir as
 		alterações para o repositório remoto central.
 		</p>
 		
 		<p>
-		$ git checkout master
-		$ git branch colaborador_remote/bugfix
+		$ git checkout master <br />
+		$ git branch colaborador_remote/bugfix <br />
 		$ git push origin master
 		</p>
 		
@@ -145,14 +150,14 @@
 		continuar o desenvolvimento no seu ritmo, sem se preocupar com o que
 		acontece no repositório original. Outra vantagem secundária da
 		decentralização de código é que os repositórios remotos clonados servem
-		como backup para o servidor original, se houver perda desse, basta
-		clonar o mais recentemente atualizado dos repositórios de colaboração e
-		as perdas serão minimizadas.
+		como backup para o servidor original, se este cair, basta clonar o mais
+		recentemente atualizado dos repositórios de colaboração e as perdas
+		serão minimizadas.
 		</p>
 		
 		<p>
 		Para que o workflow seja aplicado de forma mais eficiente, é recomendado
-		que as alterações nos repositórios clonados sejam feitas em branchs
+		que as alterações nos repositórios clonados sejam feitas em branches
 		diferentes do master. O motivo é que, se o master for alterado com novos
 		commits, quando quisermos atualizar esse branch com o comando pull
 		trazendo as alterações do repositório original, como fizemos no último
@@ -161,11 +166,11 @@
 		</p>
 		
 		<p>
-		Outra recomendação é que as colaborações nos repositório remoto, quando
+		Outra recomendação é que as colaborações no repositório remoto, quando
 		notificadas ao mantedor do projeto original, sejam passíveis de
 		fast-forward, ou seja, que não possibilitem conflitos de merge, evitando
 		que as alterações sejam rejeitadas pelo mantedor do repositório central.
-		Como vimos no post -link-, podemos contornar tal restrição facilmente
+		Como vimos no post -link-, podemos contornar facilmente tal restrição
 		com o comando rebase.
 		</p>
 	</body>

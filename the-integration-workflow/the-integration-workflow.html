@@ -92,6 +92,17 @@
 		</p>
 		
 		<p>
+		$ git checkout -b bugfix <br />
+		// corrigindo alguns bugs... <br />
+		$ git add --all <br />
+		$ git commit -m "Bug 1 corrigido" <br />
+		// corrigindo mais alguns bugs... <br />
+		$ git add --all <br />
+		$ git commit -m "Bug 2 corrigido" <br />
+		$ git push -u myremote bugfix
+		</p>
+		
+		<p>
 		---repositório remoto do colaborador---
 		</p>
 		
@@ -120,7 +131,7 @@
 		
 		<p>
 		$ git checkout master <br />
-		$ git branch colaborador_remote/bugfix <br />
+		$ git merge colaborador_remote/bugfix <br />
 		$ git push origin master
 		</p>
 		

@@ -1,0 +1,8 @@
+motivação(marcando releases ou commits estáveis, marcando versões)
+dois tipos de tags(ligthweight e annotated)
+exemplo, marcando um commit com uma lightweight tag
+mesmo exemplo, marcando com uma annotated tag
+como encontrar commits marcados pelas tags
+marcando commits anteriores(observar que tags só marcam o commit mais recente)
+subindo tags para um repositório remoto
+criando branches em commits marcados por tags(observar que não é possível fazer checkout para uma tag)

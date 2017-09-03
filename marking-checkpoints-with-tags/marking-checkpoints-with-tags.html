@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Marcando Checkpoints com Tags</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	</head>
+	<body>
+		<h1>Marcando Checkpoints com Tags</h1>
+		
+		<p>
+		Quando estamos desenvolvendo um projeto com o Git, alguns commits marcam
+		um fim da implementação de uma funcionalidade, o fechamento de uma issue
+		ou a conclusão de uma versão do projeto. Ter que checar mensagens de commits ou
+		issues não é a solução mais prática quando queremos encontrar esses commits.
+		Neste post iremos aprender como utilizar tags para marcar commits de forma
+		a encontrá-los de maneira muito mais rápida.
+		</p>
+		
+		<p>
+		Existem dois tipos de tag, as lightweight e as annotated. As lightweight
+		tags são suficientes quando precisamos apenas marcar commits. Quando
+		queremos associar mais informações às tags(como data de marcação, descrição,
+		e autor da tag), utilizamos as annotated tags.
+		</p>
+		
+		<p>
+		Como exemplo, imagine que temos um repositório com três commits. Se quisermos
+		marcar o último commit com uma annotated tag, basta utilizar o comando
+		tag seguido do identificador da tag e da mensagem(se a mensagem não for
+		informada no comando, o editor padrão será iniciado para que a mensagem
+		seja inserida).
+		</p>
+		
+		<p>
+		---repositório: três commits.
+		</p>
+		
+		<p>
+		$ git tag v1.0 -m "Versão 1.0 estável"
+		</p>
+		
+		<p>
+		---repositório: três commits, o último anotado com uma annotated tag.
+		</p>
+		
+		<p>
+		Se quisermos apenas marcar o commit com uma lightweight tag, bastaria
+		executar o comando tag seguido apenas do identificador tag.
+		</p>
+		
+		<p>
+		$ git tag v1.0
+		</p>
+		
+		<p>
+		---repositório: três commits, o último anotado com uma lightweight tag.
+		</p>
+		
+		<p>
+		Para listarmos todas as tags, executamos o comando git tag sem nenhuma
+		opção adicional.
+		</p>
+		
+		<p>
+		$ git tag
+		</p>
+		
+		<p>
+		---lista das tags criadas: somente um resultado
+		</p>
+		
+		<p>
+		Para encontrarmos os commits marcados pelas tags, basta executar o comando
+		show seguido do identificador da tag. Por exemplo, se a tag v1.0 for uma
+		annotated tag do commit mais recente, teríamos o seguinte resultado:
+		</p>
+		
+		<p>
+		$ git show v1.0
+		</p>
+		
+		<p>
+		---descrição da tag e do commit---
+		</p>
+		
+		<p>
+		É importante notar que quando utilizamos o comando git tag, a tag criada
+		sempre marca o commit mais recente. Se quisermos marcar um commit anterior,
+		precisamos informar também o seu código sha1. Por exemplo, se quisermos
+		marcar o primeiro commit do nosso repositório, executamos o comando
+		</p>
+		
+		<p>
+		$ git tag -a bigbang -m "Origem de tudo" [sha1 do primeiro commit]
+		</p>
+		
+		<p>
+		---repositório: três commits, primeiro e último anotados com annotated tags---
+		</p>
+	</body>
+</html>

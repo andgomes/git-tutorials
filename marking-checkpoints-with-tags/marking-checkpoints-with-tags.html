@@ -9,8 +9,8 @@
 		<h1>Marcando Checkpoints com Tags</h1>
 		
 		<p>
-		Quando estamos desenvolvendo um projeto com o Git, alguns commits marcam
-		um fim da implementação de uma funcionalidade, o fechamento de uma issue
+		Quando estamos desenvolvendo um projeto com o Git, alguns commits podem marcar
+		o fim da implementação de uma funcionalidade, o fechamento de uma issue
 		ou a conclusão de uma versão do projeto. Ter que checar mensagens de commits ou
 		issues não é a solução mais prática quando queremos encontrar esses commits.
 		Neste post iremos aprender como utilizar tags para marcar commits de forma
@@ -20,7 +20,7 @@
 		<p>
 		Existem dois tipos de tag, as lightweight e as annotated. As lightweight
 		tags são suficientes quando precisamos apenas marcar commits. Quando
-		queremos associar mais informações às tags(como data de marcação, descrição,
+		queremos associar mais informações às tags(como data de marcação, descrição
 		e autor da tag), utilizamos as annotated tags.
 		</p>
 		
@@ -54,10 +54,6 @@
 		</p>
 		
 		<p>
-		---repositório: três commits, o último anotado com uma lightweight tag.
-		</p>
-		
-		<p>
 		Para listarmos todas as tags, executamos o comando git tag sem nenhuma
 		opção adicional.
 		</p>
@@ -85,7 +81,7 @@
 		</p>
 		
 		<p>
-		É importante notar que quando utilizamos o comando git tag, a tag criada
+		Perceba que quando utilizamos o comando git tag, a tag criada
 		sempre marca o commit mais recente. Se quisermos marcar um commit anterior,
 		precisamos informar também o seu código sha1. Por exemplo, se quisermos
 		marcar o primeiro commit do nosso repositório, executamos o comando
@@ -97,6 +93,43 @@
 		
 		<p>
 		---repositório: três commits, primeiro e último anotados com annotated tags---
+		</p>
+		
+		<p>
+		Para subir tags em um repositório remoto, podemos utilizar o comando
+		git push seguido do nome do repositório e o identificador da tag. Por
+		exemplo, se quisermos subir a tag v1.0 para o repositório remoto origin,
+		executamos o comando
+		</p>
+		
+		<p>
+		$ git push origin v1.0
+		</p>
+		
+		<p>
+		É importante notar que, mesmo que tags marquem commits específicos, não
+		podemos fazer checkout diretamente para commits marcados por tags. Ao
+		invés disso, precisamos criar um novo branch e fazer checkout informando
+		o identificador da tag. Por exemplo, imagine que temos
+		um repositório como na imagem abaixo.
+		</p>
+		
+		<p>
+		---repositório: quatro commits, segundo marcado pela tag release-v1.0---
+		</p>
+		
+		<p>
+		Se quisermos fazer checkout para o
+		commit marcado com a tag release-v1.0, poderíamos executar o seguinte
+		comando:
+		</p>
+		
+		<p>
+		$ git checkout -b fix-release release-v1.0
+		</p>
+		
+		<p>
+		---repositório: mesmo repositório anterior, com o segundo commit apontado pelo branch fix-release--- 
 		</p>
 	</body>
 </html>

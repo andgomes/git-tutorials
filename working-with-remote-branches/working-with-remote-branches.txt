@@ -1,0 +1,7 @@
+introdução(entendendo os branches server/branch)
+subindo branches para um repositório remoto
+obtendo branches de um repositório remoto
+sincronizando branches locais com branches remotos
+branches são apenas marcadores de histórico
+o comando git pull
+deletando branches no servidor remoto

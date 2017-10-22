@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Trabalhando com Branches Remotos</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	</head>
+	<body>
+		<h1>Trabalhando com Branches Remotos</h1>
+		
+		<p>
+		Quando estamos trabalhando com um repositório remoto com outros
+		colaboradores e precisamos manter branches diferentes do master, a
+		sincronização entre o repositório local e o remoto pode facilmente ser
+		perdida a um ponto em que precisamos clonar o repositório remoto
+		novamente. Neste post, iremos mostrar como gerenciar e sincronizar
+		branches remotos de forma segura, sem que sejam gerados conflitos de
+		merge toda vez que houver alteração no servidor.
+		</p>
+		
+		<p>
+		Para subir um branch para um repositório remoto, só precisamos fazer o
+		que já fazemos em quase todos os outros posts, utilizando o comando push
+		com o nome do repositório e o identificador do branch. Por exemplo,
+		suponha que clonamos um repositório remoto, criamos dois commits e
+		agora precisamos subir esses commits para o servidor remoto. Se o
+		identificador do branch é bugfix e o nome do repositório remoto é
+		origin, só precisamos executar o seguinte comando:
+		</p>
+		
+		<p>
+		---repositório remoto com três commits---
+		</p>
+		
+		</p>
+		$ git push origin bugfix
+		</p>
+		
+		<p>
+		---repositório remoto com cinco commits---
+		</p>
+		
+		<p>
+		Quando queremos subir um branch para o repositório remoto, não é necessário
+		que esse branch introduza novos commits. Por exemplo, se tivermos um
+		branch no segundo commit e quisermos enviá-lo para o servidor, podemos
+		executar o mesmo comando:
+		</p>
+		
+		<p>
+		---repositório remoto com três commits---
+		</p>
+		
+		<p>
+		$ git branch bugfix --sha1_2nd_commit-- <br />
+		$ git push origin bugfix
+		</p>
+		
+		<p>
+		---repositório remoto com três commits---
+		</p>
+		
+		<p>
+		Agora vamos supor que estamos do outro lado e queremos trazer um branch
+		do repositório remoto para nosso repositório local. Para isso, basta
+		executar outro comando que já vimos. O comando fetch traz todas as informações
+		do servidor que ainda não temos no repositório remoto, como tags, commits e
+		branches. Como exemplo, suponha que queremos trazer um branch chamando
+		newRelease do repositório remoto para nosso repositório local.
+		</p>
+		
+		<p>
+		---repositório remoto - 5 commits---
+		</p>
+		
+		<p>
+		---repositório local - 3 commits---
+		</p>
+		
+		<p>
+		Se executarmos o comando fetch com o nome do repositório remoto, o Git
+		criará um branch chamado origin/newRelease no repositório local.
+		</p>
+		
+		<p>
+		$ git fetch origin
+		</p>
+		
+		<p>
+		---repositório local - 5 commits---
+		</p>
+	</body>
+</html>

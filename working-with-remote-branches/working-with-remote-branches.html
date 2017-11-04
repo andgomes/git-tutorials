@@ -9,10 +9,10 @@
 		<h1>Trabalhando com Branches Remotos</h1>
 		
 		<p>
-		Quando estamos trabalhando com um repositório remoto com outros
+		Quando estamos trabalhando em um repositório remoto com outros
 		colaboradores e precisamos manter branches diferentes do master, a
-		sincronização entre o repositório local e o remoto pode facilmente ser
-		perdida a um ponto em que precisamos clonar o repositório remoto
+		sincronização entre o repositório local e o remoto pode facilmente se tornar
+		complicada a um ponto em que precisamos clonar o repositório remoto
 		novamente. Neste post, iremos mostrar como gerenciar e sincronizar
 		branches remotos de forma segura, sem que sejam gerados conflitos de
 		merge toda vez que houver alteração no servidor.
@@ -20,7 +20,7 @@
 		
 		<p>
 		Para subir um branch para um repositório remoto, só precisamos fazer o
-		que já fazemos em quase todos os outros posts, utilizando o comando push
+		que já fizemos em quase todos os outros posts, utilizando o comando push
 		com o nome do repositório e o identificador do branch. Por exemplo,
 		suponha que clonamos um repositório remoto, criamos dois commits e
 		agora precisamos subir esses commits para o servidor remoto. Se o
@@ -63,10 +63,11 @@
 		<p>
 		Agora vamos supor que estamos do outro lado e queremos trazer um branch
 		do repositório remoto para nosso repositório local. Para isso, basta
-		executar outro comando que já vimos. O comando fetch traz todas as informações
-		do servidor que ainda não temos no repositório remoto, como tags, commits e
-		branches. Como exemplo, suponha que queremos trazer um branch chamando
-		newRelease do repositório remoto para nosso repositório local.
+		executar outro comando que já vimos. O comando fetch traz todas as
+		informações do servidor que ainda não temos no repositório remoto, como
+		tags, commits e branches. Como exemplo, suponha que queremos trazer um
+		branch chamado newRelease do repositório remoto para nosso repositório
+		local.
 		</p>
 		
 		<p>
@@ -88,6 +89,96 @@
 		
 		<p>
 		---repositório local - 5 commits---
+		</p>
+		
+		<p>
+		Em geral, quando baixamos novos branches do repositório remoto, queremos
+		trabalhar nas atualizações que os novos commits adicionaram no
+		repositório local. Para isso, podemos tentar fazer checkout no branch
+		trazido do servidor remoto com o seguinte comando:
+		</p>
+		
+		<p>
+		$ git checkout origin/newRelease <br /> <br />
+		Note: checking out 'origin/master'. <br /> <br />
+		You are in 'detached HEAD' state. You can look around, make experimental
+		changes and commit them, and you can discard any commits you make in this
+		state without impacting any branches by performing another checkout.
+		</p>
+		
+		<p>
+		Veja que o Git nos permite fazer o checkout mas lança um warning
+		informando que estamos "fora" do HEAD, e qualquer commit realizado será
+		simplesmente descartado. E não é isso o que queremos. De fato, a maneira
+		correta de trabalharmos em branches recém-baixados para o repositório
+		local é criar um novo branch local e sincronizá-lo com o branch remoto.
+		Para isso, podemos executar o comando
+		</p>
+		
+		<p>
+		$ git checkout -b newRelease origin/newRelease <br /><br />
+		Branch serverfix set up to track remote branch serverfix from origin.
+		Switched to a new branch 'serverfix'
+		</p>
+		
+		<p>
+		---repositório local com branch newRelase sincronizado com origin/newRelease---
+		</p>
+		
+		<p>
+		Dessa forma, criamos um branch local chamado newRelease que será
+		sincronizado com o branch origin/newRelease. Agora toda vez que subirmos
+		o branch newRelease com o comando push, atualizaremos o branch remoto do
+		servidor.
+		</p>
+		
+		<p>
+		A operação contrária também é válida, ou seja, toda vez que quisermos atualizar nosso branch local com as
+		modificações feitas no repositório remoto, podemos utilizar o comando
+		pull. Por exemplo, imagine que dois novos commits foram introduzidos
+		pelo branch newRelease no repositório remoto.
+		</p>
+		
+		<p>
+		---repositório remoto com novos commits no branch newRelease---
+		</p>
+		
+		<p>
+		---repositório local com o branch newRelease sincronizado com o origin/newRelease---
+		</p>
+		
+		<p>
+		$ git pull origin newRelease
+		</p>
+		
+		<p>
+		---repositório local com o branch newRelease atualizado de acordo com o origin/newRelease---
+		</p>
+		
+		<p>
+		De fato, o comando pull nada mais é que a concatenação dos comandos
+		fetch e merge. E justamente por utilizar o comando merge
+		automaticamente, ao fazermos um pull podemos introduzir conflitos de
+		merge difíceis de resolver. Por isso, é aconselhável utilizar os
+		comandos fetch e merge separadamente para que os passos da operação
+		sejam o mais claras possíveis. Os comandos seguintes resultam na mesma
+		situação que o comando anterior:
+		</p>
+		
+		<p>
+		$ git fetch origin <br />
+		$ git checkout newRelease <br />
+		$ git merge origin/newRelease
+		</p>
+		
+		<p>
+		Por fim, se um branch no repositório remoto não tiver mais nenhuma
+		utilidade, podemos deletá-lo passando a opção delete para o comando
+		push.
+		</p>
+		
+		<p>
+		$ git push --delete origin newRelease
 		</p>
 	</body>
 </html>

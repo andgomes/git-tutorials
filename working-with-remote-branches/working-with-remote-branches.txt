@@ -5,3 +5,4 @@ sincronizando branches locais com branches remotos
 branches são apenas marcadores de histórico
 o comando git pull
 deletando branches no servidor remoto
+fim
